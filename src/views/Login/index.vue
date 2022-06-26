@@ -18,8 +18,9 @@
           },
         ]"
       >
-        <i class="toutiao toutiao-shouji" slot="left-icon"></i
-      ></van-field>
+        <!-- <i class="toutiao toutiao-shouji" slot="left-icon"></i> -->
+        <MyIcon name="shouji" slot="left-icon"></MyIcon>
+      </van-field>
 
       <van-field
         v-model.trim="code"
@@ -104,7 +105,8 @@ export default {
   computed: {},
   watch: {},
   filters: {},
-  components: {}
+  components: {
+  }
 }
 </script>
 
