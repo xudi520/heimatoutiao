@@ -9,7 +9,8 @@
 export default {
   created () { },
   data () {
-    return {}
+    return {
+    }
   },
   methods: {},
   computed: {},

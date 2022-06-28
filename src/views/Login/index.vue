@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="登录">
+    <van-nav-bar title="登录" @click-left="$router.back()">
       <template #left>
         <van-icon name="cross"></van-icon>
       </template>
@@ -65,7 +65,7 @@ export default {
   created () { },
   data () {
     return {
-      mobile: '13911111111', // 手机号
+      mobile: '15037695173', // 手机号
       code: '246810', // 短信验证码
       time: 10 * 1000,
       isCountDownShow: false
@@ -78,6 +78,8 @@ export default {
         // console.log(res)
         // token有效俩个小时 俩种思路让用户从新登录
         this.$store.commit('setUser', res.data.data)
+        // 跳转到登录页面
+        this.$router.push({ name: 'my' })
       } catch (err) {
         console.log(err)
       }
