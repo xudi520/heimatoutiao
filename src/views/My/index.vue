@@ -102,6 +102,7 @@ export default {
     }
   },
   computed: {
+    // $store.state.user
     ...mapState(['user'])
   },
   watch: {},

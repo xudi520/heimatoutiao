@@ -9,6 +9,12 @@ import 'amfe-flexible'
 // 字体图标 初始化样式
 import '@/style/reset.less'
 import MyIcon from '@/components/MyIcon.vue'
+// 过滤器
+// 一次性把filters/index.js中所有按需导出全部导出来
+import * as obj from '@/filters'
+Object.keys(obj).forEach(key => {
+  Vue.filter(key, obj[key])
+})
 
 Vue.use(Vant)
 // component组件

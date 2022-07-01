@@ -78,7 +78,7 @@ export default {
         // console.log(res)
         // token有效俩个小时 俩种思路让用户从新登录
         this.$store.commit('setUser', res.data.data)
-        // 跳转到登录页面
+        // 跳转到已登录页面
         this.$router.push({ name: 'my' })
       } catch (err) {
         console.log(err)

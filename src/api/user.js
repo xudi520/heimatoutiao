@@ -1,6 +1,5 @@
 import request from '@/utils/request'
-// 只有views里面有this  js中没有这个this所以用
-import store from '@/store'
+
 /**
  *获取短信验证码
  * @param {number} mobile
@@ -26,15 +25,15 @@ export const login = ({ mobile, code }) => {
     }
   })
 }
+
 /**
  *登录信息
  * @returns
  */
 export const getUserInfo = () => {
   return request({
-    url: 'user',
-    headers: {
-      Authorization: 'Bearer ' + store.state.user.token
-    }
+    url: 'user'
   })
 }
+
+// 拦截器 一堆代码都需要axios 见ajax前半段
