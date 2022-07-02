@@ -2,7 +2,12 @@
   <div>
     <van-nav-bar fixed>
       <template #title>
-        <van-button type="info" icon="search" class="search-btn" round
+        <van-button
+          type="info"
+          icon="search"
+          class="search-btn"
+          round
+          to="/search"
           >搜索</van-button
         >
       </template>
@@ -11,6 +16,7 @@
     <van-tabs v-model="active" animated>
       <van-tab :title="item.name" v-for="item in channels" :key="item.id">
         <!-- 文章内容组件 -->
+
         <ArticleList :id="item.id"></ArticleList>
       </van-tab>
       <template #nav-right>
@@ -50,7 +56,7 @@
 import ArticleList from '@/components/ArticleList.vue'
 import { getMyChannels } from '@/api/home'
 import ChannelPanel from './components/ChannelPanel.vue'
-import { setItem } from '@/utils/storage'
+import { getItem } from '@/utils/storage'
 const CHANNELS = 'CHANNELS'
 
 export default {
@@ -74,8 +80,9 @@ export default {
       3.登录过 直接从ajax中拿
     */
     async getMyChannels () {
-      const channels = setItem(CHANNELS)
+      const channels = getItem(CHANNELS)
       // 匹配未登录并且本地存储中没有频道数据的情况
+      // 没有登录
       if (!(this.$store.state.user && this.$store.state.user.token) && channels) {
         this.channels = channels
       } else {

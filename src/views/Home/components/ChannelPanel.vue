@@ -123,6 +123,7 @@ export default {
         // 判断是否为登录状态
         if (this.$store.state.user && this.$store.state.user.token) {
           // 以登陆
+          // [{id:1,seq:index}]
           const arr = []
           // 把频道数据处理一下
           // 处理id和索引
