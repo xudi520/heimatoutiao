@@ -16,7 +16,6 @@
     <van-tabs v-model="active" animated>
       <van-tab :title="item.name" v-for="item in channels" :key="item.id">
         <!-- 文章内容组件 -->
-
         <ArticleList :id="item.id"></ArticleList>
       </van-tab>
       <template #nav-right>
