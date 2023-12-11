@@ -93,7 +93,7 @@ export default {
           await getSmsCode(this.mobile)
           this.$toast.success('发送成功')
         } catch (err) {
-          console.log(err)
+          // console.log(err)
           this.$toast.fail('发送失败')
         }
       } catch (err) {

@@ -16,6 +16,7 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    // login提交的token
     setUser (state, payload) {
       state.user = payload
     },

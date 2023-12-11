@@ -2,6 +2,7 @@
   <div>
     <!-- 开发者工具李必须起名字 -->
     <keep-alive :include="['home']">
+      <!-- 子路由出口 -->
       <router-view class="main"></router-view>
     </keep-alive>
     <van-tabbar route>
