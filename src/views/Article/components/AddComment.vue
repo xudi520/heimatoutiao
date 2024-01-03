@@ -1,5 +1,5 @@
 <template>
-  <!-- 评论组件 -->
+  <!-- 评论弹出层组件 -->
   <van-field
     v-model.trim="message"
     rows="2"
@@ -17,8 +17,8 @@
         :disabled="message.length === 0"
         @click="onclick"
       >
-        发布</van-button
-      >
+        发布
+      </van-button>
       <!-- :disabled="message.length === 0  是否禁用按钮 -->
     </template>
   </van-field>
@@ -43,7 +43,7 @@ export default {
   },
   data () {
     return {
-      message: ''
+      message: ''// 评论内容
     }
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
           // 对评论进行评论才需要的id
           art_id: this.art_id
         })
-        console.log(res)
+        // console.log(res)
         // 子把数据传给父 index
         this.$emit('add-comment', res.data.data.new_obj)
       } catch (error) {

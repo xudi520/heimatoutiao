@@ -1,4 +1,5 @@
 <template>
+  <!-- 关注按钮 -->
   <van-button
     :disabled="isAjax"
     :loading="isAjax"
@@ -33,6 +34,7 @@ export default {
   created () { },
   data () {
     return {
+      // 加载
       isAjax: false
     }
   },
@@ -43,6 +45,8 @@ export default {
       if (this.value) {
         try {
           await delUser(this.target)
+          // 调用父组件input 更新视图 input 或者自定事件都可以的
+          // 让父组件自己改自己
           this.$emit('input', !this.value)
         } catch (err) {
           console.log(err)

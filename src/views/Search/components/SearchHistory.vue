@@ -6,6 +6,7 @@
         >&nbsp;&nbsp;
         <span @click="isDelete = false">完成</span>
       </template>
+      <!-- 删除图标 -->
       <van-icon name="delete" @click="isDelete = true" v-else />
     </van-cell>
 

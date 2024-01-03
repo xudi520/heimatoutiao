@@ -20,6 +20,7 @@ export default new Vuex.Store({
     setUser (state, payload) {
       state.user = payload
     },
+
     // 搜索栏
     setSearchHistoryList (state, payload) {
       let arr = state.searchHistoryList

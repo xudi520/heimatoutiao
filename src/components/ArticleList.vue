@@ -1,15 +1,20 @@
 
 <template>
   <van-cell-group>
+    <!-- 下拉刷新 -->
     <van-pull-refresh
+      class="article"
       v-model="refreshing"
       @refresh="onRefresh"
       ref="pullrefresh"
+      success-text="刷新成功"
     >
       <van-list
         v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
+        :error.sync="error"
+        error-text="请求失败，点击重新加载"
         @load="onLoad"
       >
         <!-- <van-cell
@@ -19,6 +24,7 @@
           value=""
           label="描述信息"
         /> -->
+        <!-- 内容 -->
         <ArticleItem
           v-for="(item, index) in articleList"
           :key="index"
@@ -40,6 +46,7 @@ export default {
   props: {
     id: {
       type: Number,
+      // 必须要要给属性值
       required: true
     }
   },
@@ -48,6 +55,7 @@ export default {
   },
   // 操作DOM
   mounted () {
+    // 记住列表的滚动位置
     // $el 是根标签
     // console.log(this.$refs.pullrefresh)
     ele = this.$refs.pullrefresh.$el
@@ -68,7 +76,8 @@ export default {
       articleList: [],
       loading: false,
       finished: false,
-      refreshing: false
+      refreshing: false,
+      error: false
     }
   },
   methods: {
@@ -82,29 +91,33 @@ export default {
       try {
         // axios 获取的俩数据
         const res = await getAeticleList({ channel_id: this.id, timestamp: this.timestamp })
-        // console.log(res)
+        console.log(res)
         // 获取时间数据对象
         this.timestamp = res.data.data.pre_timestamp
         // 若数据已全部加载完毕，则直接将 finished 设置成 true 即可。
         if (this.timestamp === null) {
           this.finished = true
         }
-        // 在旧数据的基础上 添加新的数据
         // this.articleList = res.data.data.results
+        // 在旧数据的基础上 添加新的数据  滚动之后往里面追加内容
         this.articleList.push(...res.data.data.results)
         // 数据更新完毕后，将 loading 设置成 false
         this.loading = false
       } catch (err) {
-        console.log(err)
+        // console.log(err)
+        // 展示错误提示状态
+        this.error = true
+        this.loading = false
       }
     },
+    // 错误之后再去请求数据
     onLoad () {
       this.getAeticleList()
     },
+    // 下拉刷新时触发
     onRefresh () {
       // 清空之前的数据
       this.finished = false
-
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true
@@ -127,5 +140,9 @@ export default {
 <style scoped lang='less'>
 .van-cell-group {
   margin-top: 174px;
+  // .article{
+  //   height: 79vh;
+  //   overflow-y: auto;
+  // }
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <!-- 收藏功能 -->
   <van-loading v-if="isLoading" size=".53333rem" />
   <van-icon
     v-else

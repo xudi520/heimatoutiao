@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Tips: 在 van-search 外层增加 form 标签，且 action 不为空，即可在 iOS 输入法中显示搜索按钮。 -->
     <form action="/">
       <van-search
         v-model="searchText"
@@ -17,9 +18,9 @@
     <!-- 搜索历史 -->
     <SearchHistory v-if="searchText === ''" @search="onSearch"></SearchHistory>
     <template v-else>
-      <!-- 搜索建议 -->
-      <SearchResult v-if="isSearch" :searchText="searchText"></SearchResult>
       <!-- 搜索结果 -->
+      <SearchResult v-if="isSearch" :searchText="searchText"></SearchResult>
+      <!-- 搜索提示 -->
       <!-- :searchText="searchText" 搜索文本框内容 -->
       <SearchSuggest
         v-else
@@ -32,8 +33,9 @@
 
 <script>
 import SearchHistory from './components/SearchHistory.vue'
-import SearchSuggest from './components/SearchSuggest.vue'
 import SearchResult from './components/SearchResult.vue'
+import SearchSuggest from './components/SearchSuggest.vue'
+
 export default {
   created () { },
   data () {
@@ -47,7 +49,9 @@ export default {
     // 搜索关键字
     onSearch (str) {
       // console.log(str)
+      // 跟新文本框内容
       this.searchText = str
+      // 渲染搜索结果
       this.isSearch = true
       this.$store.commit('setSearchHistoryList', str)
     }

@@ -8,16 +8,18 @@
           class="search-btn"
           round
           to="/search"
-          >搜索</van-button
-        >
+          >
+          搜索
+        </van-button>
       </template>
     </van-nav-bar>
-
-    <van-tabs v-model="active" animated>
+    <!-- 频道列表 -->
+    <van-tabs v-model="active" animated swipeable>
       <van-tab :title="item.name" v-for="item in channels" :key="item.id">
         <!-- 文章内容组件 -->
         <ArticleList :id="item.id"></ArticleList>
       </van-tab>
+      <!-- 汉堡插槽 -->
       <template #nav-right>
         <div class="menu" @click="isChannelPanelShow = true">
           <i class="toutiao toutiao-gengduo"></i>
@@ -25,6 +27,7 @@
         <div class="menu1"></div>
       </template>
     </van-tabs>
+    <!-- 弹出层 -->
     <van-popup
       v-model="isChannelPanelShow"
       position="bottom"
@@ -32,6 +35,7 @@
       closeable
       close-icon-position="top-left"
     >
+      <!-- 频道编辑组件 -->
       <!-- 父向子传值 -->
       <ChannelPanel
         :channels="channels"
@@ -61,6 +65,7 @@ const CHANNELS = 'CHANNELS'
 export default {
   name: 'home',
   created () {
+    // 进入页面就获取频道
     this.getMyChannels()
   },
   data () {
@@ -71,6 +76,7 @@ export default {
       isChannelPanelShow: false
     }
   },
+  // 方法
   methods: {
     /*
       三种情况
@@ -80,12 +86,14 @@ export default {
     */
     async getMyChannels () {
       const channels = getItem(CHANNELS)
-      // 匹配未登录并且本地存储中没有频道数据的情况
       // 没有登录
+      // 匹配未登录并且本地存储中没有频道数据的情况
+      // 没有user或没有token或没有数据的情况下让数据进行本地存储
       if (!(this.$store.state.user && this.$store.state.user.token) && channels) {
         this.channels = channels
       } else {
         try {
+          // 登录情况下 去获取后台数据
           const res = await getMyChannels()
           this.channels = res.data.data.channels
         } catch (err) {

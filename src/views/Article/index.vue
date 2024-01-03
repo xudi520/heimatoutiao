@@ -47,6 +47,7 @@
             > -->
 
             <!-- 原始写法 -->
+            <!-- 即要用又要改就可以使用v-model -->
             <!-- <FollowUser
               :value="article.is_followed"
               @input="article.is_followed = $event"
@@ -64,7 +65,7 @@
           </van-cell>
           <!-- /用户信息 -->
 
-          <!-- 文章内容 -->
+          <!-- 文章内容 里面的图片 -->
           <div
             class="article-content markdown-body"
             v-html="article.content"
@@ -112,9 +113,10 @@
         @click="addCommentShow = true"
         >写评论</van-button
       >
+      <!-- 点赞数量 -->
       <van-icon name="comment-o" :badge="count" color="#777" />
-      <!-- 收藏 -->
       <!-- <van-icon color="#777" name="star-o" /> -->
+      <!-- 收藏 -->
       <CollectArticle
         :is_collected.sync="article.is_collected"
       ></CollectArticle>
@@ -134,6 +136,7 @@
       ></van-icon>
     </div>
     <!-- /底部区域 -->
+
     <!-- 立即分享 -->
     <van-share-sheet
       v-model="showShare"
@@ -200,7 +203,7 @@ export default {
     return {
       // 一打开页面就显示加载中
       isLoading: true,
-      article: {},
+      article: {}, // 文章
       is404Error: false,
       showShare: false,
       options: [
@@ -224,7 +227,6 @@ export default {
   async created () {
     try {
       const res = await getArticle(this.article_id)
-      // console.log(res)
       this.article = res.data.data
     } catch (err) {
       if (err.response && err.response.status === 400) {
@@ -263,7 +265,8 @@ export default {
     })
   },
   mounted () { },
-  methods: {}
+  methods: {
+  }
 }
 </script>
 

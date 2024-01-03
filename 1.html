@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const bookArr = [
+            {
+                id: 1,
+                bookName: "三国演义"
+            },
+            {
+                id: 2,
+                bookName: "水浒传"
+            },
+            {
+                id: 3,
+                bookName: "红楼梦"
+            },
+            {
+                id: 4,
+                bookName: "西游记"
+            }
+        ];
+        var i = bookArr.findIndex((value) => value.id == 4);
+        console.log(i);// 3
+        var i2 = bookArr.findIndex((value) => value.id == 100);
+        console.log(i2);// -1
+        var i3 = bookArr.findIndex((value) =>{
+            console.log(value.id);
+        });
+    </script>
+</body>
+
+</html>

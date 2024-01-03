@@ -1,4 +1,5 @@
 <template>
+  <!-- 评论列表 -->
   <div>
     <van-list
       v-model="loading"
@@ -45,6 +46,7 @@ import { getCommentList } from '@/api/comment.js'
 import CommentItem from './CommentItem.vue'
 export default {
   props: {
+    // id
     source: {
       type: [Number, String],
       required: true
@@ -52,6 +54,7 @@ export default {
     type: {
       type: String,
       required: true,
+      // 自定义 props 数据验证
       validator: function (value) {
         // 这个值必须匹配下列字符串中的一个
         return ['a', 'c'].indexOf(value) !== -1
@@ -68,6 +71,7 @@ export default {
   },
   data () {
     return {
+      // 需要携带的参数
       paramsObj: {
         type: this.type,
         source: this.source,
@@ -83,7 +87,7 @@ export default {
     async getCommentList () {
       try {
         const res = await getCommentList(this.paramsObj)
-        // console.log(res)
+        // console.log(res, '111111')
         // 若数据已全部加载完毕，则直接将 finished 设置成 true 即可。
         // 判断是否加载完毕
         if (res.data.data.results.length === 0) {

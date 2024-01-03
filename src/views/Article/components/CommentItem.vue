@@ -8,8 +8,10 @@
       style="margin-right: 10px"
       :src="item.aut_photo"
     />
-    <span style="color: #466b9d" slot="title">hello</span>
+    <!-- 名字 -->
+    <span style="color: #466b9d" slot="title">{{ item.aut_name }}</span>
     <div slot="label">
+      <!-- 内容 -->
       <p style="color: #363636">{{ item.content }}</p>
       <p>
         <span style="margin-right: 10px">{{ item.pubdate | dateformat }}</span>
@@ -17,7 +19,7 @@
           size="mini"
           type="default"
           @click="$emit('replay-show', item)"
-          >回复
+          >回复{{ item.reply_count }}
           <!-- item 整个对象 -->
         </van-button>
       </p>

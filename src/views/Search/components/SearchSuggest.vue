@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 搜索提示 -->
     <van-cell
       icon="search"
       v-for="(item, index) in list"
@@ -37,6 +38,7 @@ export default {
     // 因为这块要渲染的不是普通的字符串，而是html片段 所以用v-html v-html是属性绑定不能用过滤器
     // 所有只能在methods中写
     highight (str) {
+      console.log(str)
       const res = new RegExp(this.searchText, 'g')
       return str.replace(res, `<span style="color: red">${this.searchText}</span>`)
     }

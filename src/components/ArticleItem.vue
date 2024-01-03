@@ -1,6 +1,6 @@
 
 <template>
-  <!-- list 图片组件 -->
+  <!-- 频道列表内容 list 图片组件 -->
   <van-cell
     class="article-item"
     @click="
@@ -10,6 +10,7 @@
     <div slot="title" class="title van-multi-ellipsis--l2">
       {{ article.title }}
     </div>
+    <!--  插槽 -->
     <div slot="label">
       <div v-if="article.cover.type === 3" class="cover-wrap">
         <div
@@ -20,9 +21,11 @@
           <van-image class="cover-item-img" fit="cover" :src="img" />
         </div>
       </div>
+      <!-- 下边内容 -->
       <div class="label-info-wrap">
         <span>{{ article.aut_name }}</span>
         <span>{{ article.comm_count }}评论</span>
+        <!-- 时间 dateformat -->
         <span>{{ article.pubdate | dateformat }}</span>
       </div>
     </div>
@@ -66,6 +69,7 @@ export default {
 
   .van-cell__value {
     flex: unset;
+    // flex: 0;
     width: 232px;
     height: 146px;
     padding-left: 25px;

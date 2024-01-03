@@ -69,6 +69,7 @@ export default {
     try {
       const res = await getAllArticleList()
       // console.log(res)
+      // 过滤出频道 不相等的数据列表
       // 判断俩个对象里面的数据是否相等 如果相等就不能添加 不相等就添加
       this.recommendChannels = res.data.data.channels.filter(item => this.channels.every(item1 => item1.id !== item.id))
     } catch (err) {
@@ -82,6 +83,7 @@ export default {
     }
   },
   methods: {
+    // 添加到我的频道
     add (id) {
       // 判断我的频道索引(id) 和推荐频道id是否相等
       const index = this.recommendChannels.findIndex(item => item.id === id)
@@ -97,7 +99,9 @@ export default {
       //   onClick = onClick.disabled
       // }
     },
+    // 编辑状态删除频道 非编辑状态切换频道
     onClick (index) {
+      // 编辑状态
       if (this.isCloseShow) {
         if (index === 0) return // 推荐是不能删除的
         // 获取索引值
@@ -107,6 +111,7 @@ export default {
         // 添加到推荐频道
         this.recommendChannels.push(obj)
       } else {
+        // 非编辑状态
         // 切换高亮active
         // 子向父传值  $emit('change-active', index) 参数1:事件 参数2：参数
         this.$emit('change-active', index)
@@ -132,13 +137,14 @@ export default {
           })
           console.log(arr)
           try {
+            // 频道持久化的接口
             const res = await saveChannels(arr)
             console.log(res)
           } catch (err) {
             console.log(err)
           }
         } else { // 未登录
-          // 分装的了方法'@/utils/storage'
+          // 把数据存到本地
           setItem(CHANNELS, newVal)
         }
       },

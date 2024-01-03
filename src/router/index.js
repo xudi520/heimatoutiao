@@ -25,8 +25,9 @@ const routes = [
   },
   { path: '/login', component: Login },
   { path: '/search', component: Search },
+  // :article_id动态路由配置传输id
   { path: '/article/:article_id', component: Article, name: 'article', props: true }
-  // props: true 解耦
+  // props: true 开启路由传参
 ]
 
 const router = new VueRouter({

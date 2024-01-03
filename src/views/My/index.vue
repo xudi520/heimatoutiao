@@ -94,7 +94,7 @@ export default {
     async logout () {
       try {
         await this.$dialog.confirm({ message: '确定退出码' })
-        // token替换为空
+        // 调用vuex 清空token
         this.$store.commit('setUser', {})
       } catch (err) {
         console.log(err)

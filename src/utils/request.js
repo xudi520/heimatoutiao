@@ -6,7 +6,7 @@ const instance = axios.create({
   timeout: 5000
 })
 
-//! 添加请求拦截器
+//! 添加请求拦截器 注入token
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
   if (store.state.user && store.state.user.token) {
@@ -14,6 +14,7 @@ instance.interceptors.request.use(function (config) {
       Authorization: 'Bearer ' + store.state.user.token
     }
   }
+  // 必须返回 不然出不去
   return config
 }, function (error) {
   // 对请求错误做些什么

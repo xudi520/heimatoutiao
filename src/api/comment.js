@@ -10,6 +10,7 @@ import request from '@/utils/request.js'
  */
 export const getCommentList = ({ type, source, offset, limit }) => {
   return request({
+    method: 'GET',
     url: 'comments',
     params: { type, source, offset, limit }
   })

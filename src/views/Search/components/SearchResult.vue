@@ -1,10 +1,11 @@
 <template>
   <div>
+    <!-- 搜索结果 -->
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         v-model="loading"
         :finished="finished"
-        finished-text="没有更多了"
+        finished-text="请求失败，点击重新加载"
         @load="onLoad"
       >
         <ArticleItem
@@ -21,6 +22,7 @@
 import { getSearchResult } from '@/api/search'
 import ArticleItem from '@/components/ArticleItem.vue'
 export default {
+  name: 'SearchResult',
   props: {
     searchText: {
       type: String,
@@ -39,14 +41,19 @@ export default {
       loading: false,
       finished: false,
       // 下拉列表初始值
-      refreshing: false
+      refreshing: false,
+      error: false
     }
   },
   methods: {
     async getSearchResult () {
       try {
         const res = await getSearchResult({ page: this.page, per_page: this.per_page, q: this.searchText })
-        console.log(res)
+        // console.log(res)
+        // 模拟请求失败
+        // if (Math.random() > 0.5) {
+        //   JSON.parse('11a5d1wad')
+        // }
         // 如果数据加载完了 就提示没有更多数据
         if (res.data.data.results.length === 0) {
           // 数据加载完了 把finished设置为true
@@ -61,7 +68,7 @@ export default {
         // 在每次请求完毕后，需要手动将loading设置为false，表示加载结束
         this.refreshing = false
       } catch (err) {
-        console.log(err)
+        console.log(err, '没有跟多的数据了')
       }
     },
     onLoad () {

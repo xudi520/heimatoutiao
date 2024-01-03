@@ -5,6 +5,7 @@
         <van-icon name="cross" />
       </template>
     </van-nav-bar>
+    <!-- 评论组件 -->
     <CommentItem :item="comment" class="comment"></CommentItem>
     <van-cell title="全部回复" />
     <CommentItem
@@ -67,7 +68,7 @@ export default {
     async getCommentList () {
       try {
         const res = await getCommentList({ type: 'c', source: this.comment.com_id, offset: this.offset, limit: this.limit })
-        console.log(res)
+        // console.log(res)
         this.list = res.data.data.results
       } catch (error) {
         console.log(error)
@@ -106,6 +107,5 @@ export default {
   bottom: 0;
   padding: 10px 30px;
   box-sizing: border-box;
-  background-color: pink;
 }
 </style>
